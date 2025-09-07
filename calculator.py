@@ -84,13 +84,19 @@ class CalculatorMain(QWidget):
 	    self.history[2].setText(f'{self.history[2].text()}{sended}')
 	    
 	def clear(self):
-	    self.line.setText('')
-	    
-	def calculate(self):
-	    self.history[2].setText(str(eval(f'{self.history[0].text()}{self.history[1].text()}{self.history[2].text()}')))
+	    self.history[2].setText('0')
 	    self.history[0].setText('')
 	    self.history[1].setText('')
 	    
+	def calculate(self):
+	    try:
+	        self.history[2].setText(str(eval(f'{self.history[0].text()}{self.history[1].text()}{self.history[2].text()}')))
+	        self.history[0].setText('')
+	        self.history[1].setText('')
+	        
+	        self.message.setText(' ')
+	    except ZeroDivisionError:
+	        self.message.setText('Деление На ноль')
 		
 		
 if __name__ == '__main__':
@@ -100,4 +106,3 @@ if __name__ == '__main__':
     sys.exit(app.exec())   
     
 		
-
